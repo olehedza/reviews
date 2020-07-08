@@ -1,6 +1,7 @@
 package com.olehedza.reviews.util;
 
 import com.olehedza.reviews.dto.parser.CsvDto;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -10,11 +11,9 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 @Component
-@Primary
 @Getter
 @Slf4j
 public class CsvParser implements Parser<CsvDto> {
@@ -25,10 +24,11 @@ public class CsvParser implements Parser<CsvDto> {
     }
 
     @Override
-    public List<CsvDto> parse(String path) {
+    public List<CsvDto> parse(String path) throws IOException {
         try (Reader in = new FileReader(path)) {
             Iterable<CSVRecord> records = CSVFormat.DEFAULT
-                    .withFirstRecordAsHeader().parse(in);
+                    .withFirstRecordAsHeader()
+                    .parse(in);
             for (CSVRecord record : records) {
                 if (record.size() == CsvHeaders.values().length) {
                     CsvDto dto = CsvDto.builder()
@@ -47,8 +47,12 @@ public class CsvParser implements Parser<CsvDto> {
                     csvDtoList.add(dto);
                 }
             }
+        } catch (FileNotFoundException e) {
+            log.error("File not found ", e);
+            throw new FileNotFoundException("File not found ");
         } catch (IOException e) {
-            log.error("File not founded ", e);
+            log.error("Can't read the file ", e);
+            throw new IOException("Can't read the file ");
         }
         return csvDtoList;
     }
