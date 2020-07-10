@@ -12,9 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class JvSpringBootApplicationTests {
     private static final String FILE_PATH =
-            "/home/olehedza/IdeaProjects/reviews/src/test/resources/readFileTest.csv";
+            "src/test/resources/readFileTest.csv";
     private static final String INVALID_FILE_PATH =
-            "/home/olehedza/IdeaProjects/reviews/src/test/resources/readFileTst.csv";
+            "src/test/resources/readFileTst.csv";
     private static final int CSV_ROWS_NUMBER = 5;
     @Autowired
     private FileReader csvReader;
