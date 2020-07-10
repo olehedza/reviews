@@ -1,7 +1,6 @@
 package com.olehedza.reviews;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.olehedza.reviews.dto.parser.CsvDto;
 import com.olehedza.reviews.util.FileReader;
@@ -9,6 +8,8 @@ import com.olehedza.reviews.util.Parser;
 import java.io.IOException;
 import java.lang.reflect.UndeclaredThrowableException;
 import java.net.URISyntaxException;
+
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
