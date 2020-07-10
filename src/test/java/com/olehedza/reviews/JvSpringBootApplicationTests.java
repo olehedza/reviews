@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.olehedza.reviews.util.FileReader;
 import java.lang.reflect.UndeclaredThrowableException;
-import java.net.URISyntaxException;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
