@@ -19,8 +19,7 @@ public class CsvFileReader implements FileReader {
         try (Stream<String> stream = Files.lines(Paths.get(path))) {
             return stream.collect(Collectors.toList());
         } catch (IOException e) {
-            log.error("Can't read file", e);
-            throw new UndeclaredThrowableException(e);
+            throw new UndeclaredThrowableException(e, "Can't read file");
         }
     }
 }
