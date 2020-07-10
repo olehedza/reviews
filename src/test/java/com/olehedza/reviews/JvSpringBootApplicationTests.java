@@ -1,6 +1,7 @@
 package com.olehedza.reviews;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.olehedza.reviews.dto.parser.CsvDto;
 import com.olehedza.reviews.util.FileReader;
@@ -30,7 +31,7 @@ public class JvSpringBootApplicationTests {
     private Parser<CsvDto> csvParser;
 
     @Test
-    public void csvFileReaderRowsNumberTest() {
+    public void csvFileReaderTest() {
         assertEquals(CSV_ROWS_NUMBER, csvReader.readFile(FILE_PATH).size());
     }
 
