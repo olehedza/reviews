@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.olehedza.reviews.util.FileReader;
 import java.lang.reflect.UndeclaredThrowableException;
+import java.net.URISyntaxException;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,15 +14,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class JvSpringBootApplicationTests {
     private static final String FILE_PATH =
-            "src/test/resources/readFileTest.csv";
+            "readFileTest.csv";
     private static final String INVALID_FILE_PATH =
-            "src/test/resources/readFileTst.csv";
+            "readFileTst.csv";
     private static final int CSV_ROWS_NUMBER = 5;
     @Autowired
     private FileReader csvReader;
 
     @Test
-    public void csvFileReaderTest() {
+    public void csvFileReaderTest() throws URISyntaxException {
         assertEquals(CSV_ROWS_NUMBER, csvReader.readFile(FILE_PATH).size());
     }
 
