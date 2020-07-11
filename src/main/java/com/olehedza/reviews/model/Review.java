@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +15,6 @@ import lombok.NoArgsConstructor;
 @Table(name = "reviews")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Builder
 public class Review {
     @Id
@@ -26,8 +24,8 @@ public class Review {
     private Integer helpfulnessDenominator;
     private Integer score;
     private LocalDate time;
-    @Column(length=40000)
+    @Column(length=2000)
     private String summary;
-    @Column(length=40000)
+    @Column(length=2000)
     private String text;
 }

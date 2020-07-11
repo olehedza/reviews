@@ -1,22 +1,24 @@
 package com.olehedza.reviews.model;
 
-import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.*;
-import lombok.Data;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name = "products")
 @NoArgsConstructor
-@Data
 public class Product {
     @Id
     private String productId;
-    @OneToMany
-    @Cascade(value = CascadeType.SAVE_UPDATE)
-    private List<Review> reviews = new ArrayList<>();
-    private boolean isFood;
+    @ManyToMany
+    @JoinTable(
+            name = "users_products",
+            joinColumns = @JoinColumn(name = "productId"),
+            inverseJoinColumns = @JoinColumn(name = "userId"))
+    private List<User> users;
 }
