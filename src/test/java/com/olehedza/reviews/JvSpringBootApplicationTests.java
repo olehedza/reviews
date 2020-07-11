@@ -22,7 +22,7 @@ public class JvSpringBootApplicationTests {
     private FileReader csvReader;
 
     @Test
-    public void csvFileReaderTest() throws URISyntaxException {
+    public void csvFileReaderTest() {
         assertEquals(CSV_ROWS_NUMBER, csvReader.readFile(FILE_PATH).size());
     }
 
