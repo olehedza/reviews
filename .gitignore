@@ -4,7 +4,6 @@ target/
 !**/src/main/**
 !**/src/test/**
 Reviews.csv
-reviews_mini.csv
 
 ### STS ###
 .apt_generated
