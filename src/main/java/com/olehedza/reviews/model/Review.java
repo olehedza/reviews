@@ -26,8 +26,8 @@ public class Review {
     private Integer helpfulnessDenominator;
     private Integer score;
     private LocalDate time;
-    @Column(length=2000)
+    @Column(length=40000)
     private String summary;
-    @Column(length=2000)
+    @Column(length=40000)
     private String text;
 }
