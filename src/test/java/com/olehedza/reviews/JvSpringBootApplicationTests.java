@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.lang.reflect.UndeclaredThrowableException;
 import java.net.URISyntaxException;
 
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,7 +29,7 @@ public class JvSpringBootApplicationTests {
     private Parser<CsvDto> csvParser;
 
     @Test
-    public void csvFileReaderTest() {
+    public void csvFileReaderRowsNumberTest() {
         assertEquals(CSV_ROWS_NUMBER, csvReader.readFile(FILE_PATH).size());
     }
 
@@ -39,7 +40,8 @@ public class JvSpringBootApplicationTests {
     }
 
     @Test
-    public void csvParserTest() throws IOException {
+    @SneakyThrows
+    public void csvParserDtoNumberTest() {
         assertEquals(DTO_NUMBER, csvParser.parse(FILE_PATH).size());
     }
 }
