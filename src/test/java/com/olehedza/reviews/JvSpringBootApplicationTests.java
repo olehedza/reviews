@@ -1,7 +1,6 @@
 package com.olehedza.reviews;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.olehedza.reviews.dto.parser.CsvDto;
 import com.olehedza.reviews.util.FileReader;
@@ -21,6 +20,8 @@ public class JvSpringBootApplicationTests {
             "readFileTest.csv";
     private static final String INVALID_FILE_PATH =
             "readFileTst.csv";
+    private static final String INVALID_CSV_PATH =
+            "csvParserTest.csv";
     private static final int CSV_ROWS_NUMBER = 5;
     private static final int DTO_NUMBER = 4;
     @Autowired
@@ -43,5 +44,11 @@ public class JvSpringBootApplicationTests {
     @SneakyThrows
     public void csvParserDtoNumberTest() {
         assertEquals(DTO_NUMBER, csvParser.parse(FILE_PATH).size());
+    }
+
+    @Test
+    public void parserInvalidCsvThrowsExceptionTest() {
+        assertThrows(IllegalArgumentException.class,
+                () -> csvParser.parse(INVALID_CSV_PATH));
     }
 }
