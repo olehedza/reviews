@@ -1,11 +1,10 @@
 package com.olehedza.reviews.service;
 
 import com.olehedza.reviews.model.Word;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import java.util.List;
 
 public interface WordService {
-    void addWord(Word word);
+    List<Word> findWordsWithLimit(int limit);
 
-    Page<Word> getAll(Pageable pageable);
+    void add(Word word);
 }

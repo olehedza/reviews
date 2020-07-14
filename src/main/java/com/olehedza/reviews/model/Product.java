@@ -1,14 +1,11 @@
 package com.olehedza.reviews.model;
 
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name = "products")
@@ -23,4 +20,8 @@ public class Product {
             joinColumns = @JoinColumn(name = "productId"),
             inverseJoinColumns = @JoinColumn(name = "userId"))
     private List<User> users;
+    @OneToMany
+    @Cascade(value = org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    private List<Review> reviews;
+    private boolean isFood;
 }
