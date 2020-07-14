@@ -41,8 +41,7 @@ public class JvSpringBootApplicationTests {
     }
 
     @Test
-    @SneakyThrows
-    public void csvParserDtoNumberTest() {
+    public void csvParserDtoNumberTest() throws IOException {
         assertEquals(DTO_NUMBER, csvParser.parse(FILE_PATH).size());
     }
 
