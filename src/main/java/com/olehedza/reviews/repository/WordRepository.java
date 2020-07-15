@@ -12,6 +12,4 @@ public interface WordRepository extends JpaRepository<Word, Long> {
     @Query("select w.id, w.word from Word w" +
             " group by w.word order by count(w.word) desc")
     Page<Word> queryFirst1000(Pageable pageable);
-
-    void add(Word word);
 }

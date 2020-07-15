@@ -23,5 +23,4 @@ public class Product {
     @OneToMany
     @Cascade(value = org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private List<Review> reviews;
-    private boolean isFood;
 }
