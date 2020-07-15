@@ -8,6 +8,7 @@ import com.olehedza.reviews.util.FileReader;
 import com.olehedza.reviews.util.Parser;
 import java.io.IOException;
 import java.lang.reflect.UndeclaredThrowableException;
+import java.net.URISyntaxException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,7 +30,11 @@ public class JvSpringBootApplicationTests {
 
     @Test
     public void csvFileReaderTest() {
-        assertEquals(CSV_ROWS_NUMBER, csvReader.readFile(FILE_PATH).size());
+        try {
+            assertEquals(CSV_ROWS_NUMBER, csvReader.readFile(FILE_PATH).size());
+        } catch (URISyntaxException e) {
+            throw new UndeclaredThrowableException(e);
+        }
     }
 
     @Test
@@ -43,7 +48,7 @@ public class JvSpringBootApplicationTests {
         try {
             assertEquals(DTO_NUMBER, csvParser.parse(FILE_PATH).size());
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new UndeclaredThrowableException(e, "Csv parser dto invalid size");
         }
     }
 
