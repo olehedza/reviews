@@ -41,8 +41,12 @@ public class JvSpringBootApplicationTests {
     }
 
     @Test
-    public void csvParserDtoNumberTest() throws IOException {
-        assertEquals(DTO_NUMBER, csvParser.parse(FILE_PATH).size());
+    public void csvParserDtoNumberTest() {
+        try {
+            assertEquals(DTO_NUMBER, csvParser.parse(FILE_PATH).size());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
