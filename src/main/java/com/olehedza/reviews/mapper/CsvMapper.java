@@ -30,12 +30,15 @@ public class CsvMapper {
         User user = new User();
         user.setUserId(dto.getUserId());
         user.setProfileName(dto.getProfileName());
+        user.getReviews().add(getReviewFromDto(dto));
+        user.getProducts().add(getProductFromDto(dto));
         return user;
     }
 
     public Product getProductFromDto(CsvDto dto) {
         Product product = new Product();
         product.setProductId(dto.getProductId());
+        product.getReviews().add(getReviewFromDto(dto));
         return product;
     }
 }
