@@ -7,21 +7,18 @@ import com.olehedza.reviews.model.User;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.TimeZone;
-import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
-public class CsvMapper implements Mapper {
-    private static final String KEYWORD = "food";
+public class CsvMapper {
 
-    @Override
-    public Review toReview(@NotNull CsvDto dto) {
+    public Review getReviewFromDto(CsvDto dto) {
         return Review.builder()
                 .score(dto.getScore())
                 .helpfulnessDenominator(dto.getHelpfulnessDenominator())
-                .helpfulnessNumerator(dto.getHelpfulnessNumerator())
+                                .helpfulnessNumerator(dto.getHelpfulnessNumerator())
                 .time(LocalDate.ofInstant(Instant.ofEpochSecond(dto.getTime()),
                         TimeZone.getTimeZone("UTC").toZoneId()))
                 .summary(dto.getSummary())
@@ -29,22 +26,19 @@ public class CsvMapper implements Mapper {
                 .build();
     }
 
-    @Override
-    public Product toProduct(@NotNull CsvDto dto, Review review) {
-        Product product = new Product();
-        product.setProductId(dto.getProductId());
-        product.setFood(review.getText().toLowerCase().contains(KEYWORD)
-                || review.getSummary().toLowerCase().contains(KEYWORD));
-        return product;
-    }
-
-    @Override
-    public User toUser(@NotNull CsvDto dto, Review review, Product product) {
+    public User getUserFromDto(CsvDto dto) {
         User user = new User();
         user.setUserId(dto.getUserId());
         user.setProfileName(dto.getProfileName());
-        user.getReviews().add(review);
-        user.getProducts().add(product);
+        user.getReviews().add(getReviewFromDto(dto));
+        user.getProducts().add(getProductFromDto(dto));
         return user;
+    }
+
+    public Product getProductFromDto(CsvDto dto) {
+        Product product = new Product();
+        product.setProductId(dto.getProductId());
+        product.getReviews().add(getReviewFromDto(dto));
+        return product;
     }
 }
