@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface WordRepository extends JpaRepository<Word, Long> {
-    @Query("select w.id, w.word from Word w" +
+    @Query("select w.word, count(w.word) from Word w" +
             " group by w.word order by count(w.word) desc")
-    Page<Word> queryFirst1000(Pageable pageable);
+    Page<Word> getAll(Pageable pageable);
 }
