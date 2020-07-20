@@ -15,8 +15,6 @@ public class Word {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String word;
-    @Transient
-    private Long count;
 
     public Word(String word) {
         this.word = word;
