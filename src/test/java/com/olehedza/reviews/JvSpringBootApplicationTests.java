@@ -1,6 +1,7 @@
 package com.olehedza.reviews;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.olehedza.reviews.dto.parser.CsvDto;
 import com.olehedza.reviews.util.FileReader;
@@ -8,8 +9,6 @@ import com.olehedza.reviews.util.Parser;
 import java.io.IOException;
 import java.lang.reflect.UndeclaredThrowableException;
 import java.net.URISyntaxException;
-
-import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,8 +29,12 @@ public class JvSpringBootApplicationTests {
     private Parser<CsvDto> csvParser;
 
     @Test
-    public void csvFileReaderRowsNumberTest() {
-        assertEquals(CSV_ROWS_NUMBER, csvReader.readFile(FILE_PATH).size());
+    public void csvFileReaderTest() {
+        try {
+            assertEquals(CSV_ROWS_NUMBER, csvReader.readFile(FILE_PATH).size());
+        } catch (URISyntaxException e) {
+            throw new UndeclaredThrowableException(e);
+        }
     }
 
     @Test
@@ -45,7 +48,7 @@ public class JvSpringBootApplicationTests {
         try {
             assertEquals(DTO_NUMBER, csvParser.parse(FILE_PATH).size());
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new UndeclaredThrowableException(e, "Csv parser dto invalid size");
         }
     }
 
