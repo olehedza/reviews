@@ -3,6 +3,8 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**
+Reviews.csv
+reviews_mini.csv
 
 ### STS ###
 .apt_generated
